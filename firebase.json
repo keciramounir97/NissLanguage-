@@ -4,10 +4,13 @@
     "ignore": [
       "firebase.json",
       "**/.*",
+      "**/.git/**",
+      "**/.firebase/**",
       "**/node_modules/**",
       "test/**",
       "package.json",
-      "README.md"
+      "README.md",
+      "LICENSE"
     ]
   }
 }
