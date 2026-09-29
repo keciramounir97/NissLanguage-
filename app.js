@@ -1,5 +1,8 @@
-import { LETTERS, encodeWord } from "./niss/alphabet.js";
-import { MOODS, entries, names, numbers, particles } from "./niss/lexicon.js";
+import { encodeWord } from "./niss/alphabet.js";
+import { applyPatch } from "./niss/book.js";
+import { pullPatch } from "./niss/cloud.js";
+import { MOODS } from "./niss/lexicon.js";
+import { loadPatch, savePatch } from "./niss/persist.js";
 import { translate } from "./niss/translate.js";
 
 const firebaseConfig = {
@@ -34,15 +37,17 @@ const target = document.querySelector("#target");
 const moods = document.querySelector("#moods");
 const hint = document.querySelector("#mood-hint");
 const samples = document.querySelector("#samples");
+const fiche = document.querySelector("#fiche");
 let mood = "literal";
+let book = applyPatch(loadPatch(localStorage));
 
 const sampleLines = [
-  ["Ça va", "💯 👍"],
-  ["Je t'aime", "😍 🫶"],
-  ["Hangry", "🤤 🍔"],
-  ["D'accord", "k"],
-  ["Copine", "bby 😍 🫶"],
-  ["Salut épelé", encodeWord("hi")],
+  ["I'm fine", "💯 👍"],
+  ["I love you", "😍 🫶"],
+  ["Candy", "🍬 🍭"],
+  ["Pastry", "🍩 🥐"],
+  ["Chocolate", "🍫 🍪"],
+  ["Okay", "k"],
 ];
 
 for (const [label, line] of sampleLines) {
@@ -76,7 +81,7 @@ for (const item of MOODS) {
 hint.textContent = MOODS[0].hint;
 
 function render() {
-  const result = translate(niss.value, { target: target.value, context: mood });
+  const result = translate(niss.value, { target: target.value, context: mood, book });
   out.lang = target.value;
   out.textContent = result.text || "…";
   if (result.unknown.length) {
@@ -85,6 +90,39 @@ function render() {
   } else {
     unknown.hidden = true;
   }
+}
+
+function paintFiche() {
+  const line = "💯 👍";
+  fiche.replaceChildren();
+  const head = document.createElement("tr");
+  for (const label of ["Humeur", "Français", "English", "Arabe"]) {
+    const cell = document.createElement("th");
+    cell.textContent = label;
+    if (label === "Arabe") cell.className = "ar";
+    head.append(cell);
+  }
+  const body = document.createElement("tbody");
+  const thead = document.createElement("thead");
+  thead.append(head);
+  for (const item of MOODS) {
+    const row = document.createElement("tr");
+    const values = [
+      item.label,
+      translate(line, { target: "fr", context: item.id, book }).text,
+      translate(line, { target: "en", context: item.id, book }).text,
+      translate(line, { target: "ar", context: item.id, book }).text,
+    ];
+    values.forEach((value, index) => {
+      const cell = document.createElement("td");
+      cell.textContent = value;
+      if (index === 3) cell.className = "ar";
+      row.append(cell);
+    });
+    body.append(row);
+  }
+  fiche.append(thead, body);
+  document.querySelector("#hi-spell").textContent = encodeWord("hi", book.letters);
 }
 
 niss.addEventListener("input", render);
@@ -100,103 +138,13 @@ document.querySelector("#copy").addEventListener("click", async () => {
   }, 1200);
 });
 
-document.querySelector("#hi-spell").textContent = encodeWord("hi");
-document.querySelector("#honey-spell").textContent = `honey s'écrit ${encodeWord("honey")}.`;
-
-const letters = document.querySelector("#letters");
-for (const [letter, emoji] of Object.entries(LETTERS)) {
-  const cell = document.createElement("div");
-  const mark = document.createElement("b");
-  mark.textContent = emoji;
-  const name = document.createElement("span");
-  name.textContent = letter;
-  cell.append(mark, name);
-  letters.append(cell);
-}
-
-function table(head, rows) {
-  const html = [`<thead><tr>${head.map((cell) => `<th${cell === "Arabe" ? ' class="ar"' : ""}>${cell}</th>`).join("")}</tr></thead><tbody>`];
-  for (const row of rows) {
-    html.push("<tr>");
-    row.forEach((cell, index) => {
-      const arabic = head[index] === "Arabe";
-      html.push(`<td${arabic ? ' class="ar"' : ""}>${escapeHtml(cell)}</td>`);
-    });
-    html.push("</tr>");
-  }
-  html.push("</tbody>");
-  return html.join("");
-}
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
-}
-
-function literalRow(entry) {
-  const lit = entry.readings.literal;
-  return [entry.niss.join(" "), lit.en, lit.fr, lit.ar];
-}
-
-const fiche = document.querySelector("#fiche");
-fiche.innerHTML = table(
-  ["Humeur", "Français", "English", "Arabe"],
-  MOODS.map((item) => {
-    const line = "💯 👍";
-    return [
-      item.label,
-      translate(line, { target: "fr", context: item.id }).text,
-      translate(line, { target: "en", context: item.id }).text,
-      translate(line, { target: "ar", context: item.id }).text,
-    ];
-  }),
-);
-fiche.querySelectorAll("tr").forEach((row) => {
-  const last = row.lastElementChild;
-  if (last && last.cellIndex === 3) last.classList.add("ar");
-});
-
-document.querySelector("#numbers").innerHTML = table(
-  ["Code", "Chiffre", "Français", "English", "Arabe"],
-  numbers.map((entry) => [
-    entry.niss[0],
-    entry.digit,
-    entry.readings.literal.fr,
-    entry.readings.literal.en,
-    entry.readings.literal.ar,
-  ]),
-);
-
-document.querySelector("#names").innerHTML = table(
-  ["Niss", "Français", "English", "Arabe"],
-  names.map(literalRow),
-);
-
-document.querySelector("#particles").innerHTML = table(
-  ["Niss", "Français", "English", "Arabe"],
-  particles.map(literalRow),
-);
-
-const phraseRows = entries.map((entry) => ({
-  entry,
-  cells: literalRow(entry),
-}));
-
-function paintPhrases(query) {
-  const q = query.trim().toLowerCase();
-  const rows = phraseRows
-    .filter(({ cells }) => !q || cells.some((cell) => cell.toLowerCase().includes(q)))
-    .map(({ cells }) => cells);
-  document.querySelector("#phrases").innerHTML = table(
-    ["Niss", "English", "Français", "Arabe"],
-    rows,
-  );
-}
-
-document.querySelector("#filter").addEventListener("input", (event) => {
-  paintPhrases(event.target.value);
-});
-paintPhrases("");
+paintFiche();
 render();
+
+pullPatch().then((remote) => {
+  if (!remote) return;
+  book = applyPatch(remote);
+  savePatch(remote, localStorage);
+  paintFiche();
+  render();
+});

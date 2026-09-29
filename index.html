@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NissLanguage</title>
+    <title>Traduire — NissLanguage</title>
     <meta
       name="description"
-      content="NissLanguage traduit un code d'emojis, de surnoms et d'humeurs vers le français, l'anglais et l'arabe."
+      content="Pour mieux comprendre Nissou. Elle a inventé sa propre langue."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,8 +25,12 @@
 
     <main>
       <header class="mast">
+        <nav class="nav">
+          <a href="index.html" aria-current="page">Traduire</a>
+          <a href="dictionnaire.html">Dictionnaire</a>
+        </nav>
         <h1>NissLanguage</h1>
-        <p>Un code de filles : emojis, surnoms, chiffres maquillés. Sept humeurs, trois langues.</p>
+        <p>Pour mieux comprendre Nissou. Elle a inventé sa propre langue.</p>
       </header>
 
       <section class="desk" aria-label="Traducteur">
@@ -43,12 +47,12 @@
             <label for="target">Langue</label>
             <select id="target">
               <option value="fr">Français</option>
-              <option value="en">English</option>
+              <option value="en" selected>English</option>
               <option value="ar">العربية</option>
             </select>
             <button type="button" id="copy">Copier</button>
           </div>
-          <p id="out" class="out" lang="fr"></p>
+          <p id="out" class="out" lang="en"></p>
           <p id="unknown" class="unknown" hidden></p>
         </div>
       </section>
@@ -57,9 +61,10 @@
         <h2 id="rules-title">Comment lire</h2>
         <ol>
           <li>Un mot est un jeton. Les jetons se séparent par des espaces.</li>
-          <li>La plus longue suite connue gagne. <span class="niss">💯 👍</span> veut dire « ça va », pas « vraiment » puis « oui ».</li>
-          <li>Des lettres collées épellent un mot. <span id="hi-spell" class="niss"></span> se lit « hi », donc salut.</li>
+          <li>La plus longue suite connue gagne. <span class="niss">💯 👍</span> veut dire « I'm fine », pas « truly » puis « yes ».</li>
+          <li>Des lettres collées épellent un mot. <span id="hi-spell" class="niss"></span> se lit « hi », donc hello.</li>
           <li>L'humeur ne change pas l'écriture. Elle change le sens. En registre contraire, la phrase veut dire l'inverse.</li>
+          <li>L'alphabet, les chiffres et les mots sont dans le <a href="dictionnaire.html">dictionnaire</a>.</li>
         </ol>
       </section>
 
@@ -67,42 +72,6 @@
         <h2 id="fiche-title"><span class="niss">💯 👍</span> dans chaque humeur</h2>
         <div class="table-wrap">
           <table id="fiche"></table>
-        </div>
-      </section>
-
-      <section aria-labelledby="alpha-title">
-        <h2 id="alpha-title">Alphabet</h2>
-        <p>Une lettre, un emoji. On les colle pour épeler un prénom ou un mot absent du lexique. <span id="honey-spell"></span></p>
-        <div class="letters" id="letters"></div>
-      </section>
-
-      <section aria-labelledby="num-title">
-        <h2 id="num-title">Chiffres</h2>
-        <div class="table-wrap">
-          <table id="numbers"></table>
-        </div>
-      </section>
-
-      <section aria-labelledby="name-title">
-        <h2 id="name-title">Surnoms</h2>
-        <div class="table-wrap">
-          <table id="names"></table>
-        </div>
-      </section>
-
-      <section aria-labelledby="part-title">
-        <h2 id="part-title">Mots courants</h2>
-        <div class="table-wrap">
-          <table id="particles"></table>
-        </div>
-      </section>
-
-      <section aria-labelledby="lex-title">
-        <h2 id="lex-title">Phrases</h2>
-        <label class="filter" for="filter">Filtrer le lexique</label>
-        <input id="filter" type="search" placeholder="emoji, mot, français, anglais, arabe" />
-        <div class="table-wrap">
-          <table id="phrases"></table>
         </div>
       </section>
     </main>

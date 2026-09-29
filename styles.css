@@ -234,6 +234,92 @@ td.ar, th.ar {
   .out { font-size: 1.7rem; }
 }
 
+.nav {
+  display: flex;
+  gap: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.nav a {
+  color: var(--orchid);
+  text-decoration: none;
+}
+
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  box-shadow: inset 0 -2px 0 var(--orchid);
+}
+
+.dict-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem 1rem;
+  align-items: end;
+  margin-top: 1.2rem;
+  position: sticky;
+  top: 0;
+  background: var(--paper);
+  padding: 0.6rem 0;
+  z-index: 2;
+}
+
+.dict-bar form, .edit-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 0.8rem;
+  align-items: end;
+}
+
+.dict td.mean {
+  font-family: Fraunces, serif;
+  font-size: 1.28rem;
+}
+
+.dict td.niss {
+  font-size: 1.35rem;
+  width: 28%;
+}
+
+.dict button, #gate button, .edit-grid button {
+  background: none;
+  border: 0;
+  color: var(--orchid);
+  cursor: pointer;
+  font: inherit;
+  padding: 0.15rem 0;
+}
+
+.dict button:focus-visible, #gate button:focus-visible, .edit-grid button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+#add-panel { margin-top: 1.4rem; }
+
+dialog {
+  border: 0;
+  border-left: 4px solid var(--blush);
+  background: var(--note);
+  color: var(--ink);
+  padding: 1.2rem 1.3rem;
+  max-width: 36rem;
+}
+
+dialog::backdrop { background: rgba(42, 18, 64, 0.35); }
+
+.edit-grid label { display: grid; gap: 0.2rem; }
+
+.edit-grid input {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  font: inherit;
+  color: inherit;
+  min-width: 12rem;
+}
+
+.edit-actions { display: flex; gap: 1rem; }
+
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto; }
 }

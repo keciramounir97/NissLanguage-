@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dictionnaire — NissLanguage</title>
+    <meta
+      name="description"
+      content="Le dictionnaire de Nissou : une langue, son équivalent, et rien d'autre tant que le mot de passe n'est pas entré."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620&family=Noto+Naskh+Arabic:wght@500;600&family=Outfit:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.svg" />
+  </head>
+  <body>
+    <aside class="rail">
+      <b>Niss</b>
+      <span>code</span>
+    </aside>
+
+    <main>
+      <header class="mast">
+        <nav class="nav">
+          <a href="index.html">Traduire</a>
+          <a href="dictionnaire.html" aria-current="page">Dictionnaire</a>
+        </nav>
+        <h1>Dictionnaire</h1>
+        <p>Pour mieux comprendre Nissou. Elle a inventé sa propre langue.</p>
+      </header>
+
+      <div class="dict-bar">
+        <label for="lang">Langue du tableau</label>
+        <select id="lang">
+          <option value="en" selected>English</option>
+          <option value="fr">Français</option>
+          <option value="ar">العربية</option>
+        </select>
+        <label class="filter" for="q">Filtrer</label>
+        <input id="q" type="search" placeholder="mot ou niss" />
+        <form id="gate">
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" autocomplete="current-password" />
+          <button type="submit">Ouvrir</button>
+        </form>
+        <p id="gate-note" class="hint">Lecture seule.</p>
+      </div>
+
+      <section id="add-panel" hidden>
+        <h2>Ajouter un mot</h2>
+        <form id="add" class="edit-grid">
+          <label>NissLanguage<input name="niss" required placeholder="🍫 🍩" /></label>
+          <label>English<input name="en" required /></label>
+          <label>Français<input name="fr" required /></label>
+          <label>العربية<input name="ar" required dir="rtl" /></label>
+          <button type="submit">Ajouter</button>
+        </form>
+        <p id="save-note" class="hint"></p>
+      </section>
+
+      <section aria-labelledby="letters-title">
+        <h2 id="letters-title">Lettres</h2>
+        <div class="table-wrap">
+          <table class="dict" id="letters"></table>
+        </div>
+      </section>
+
+      <section aria-labelledby="numbers-title">
+        <h2 id="numbers-title">Chiffres</h2>
+        <div class="table-wrap">
+          <table class="dict" id="numbers"></table>
+        </div>
+      </section>
+
+      <section aria-labelledby="words-title">
+        <h2 id="words-title">Mots</h2>
+        <p class="hint">Bonbons, chocolat, pâtisserie, surnoms, phrases. Triés dans la langue choisie.</p>
+        <div class="table-wrap">
+          <table class="dict" id="words"></table>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="edit">
+      <form id="edit-form" class="edit-grid">
+        <h2 id="edit-title">Modifier</h2>
+        <label id="niss-label">NissLanguage<input name="niss" required /></label>
+        <label class="lang-field">English<input name="en" /></label>
+        <label class="lang-field">Français<input name="fr" /></label>
+        <label class="lang-field">العربية<input name="ar" dir="rtl" /></label>
+        <p id="edit-error" class="hint"></p>
+        <div class="edit-actions">
+          <button type="button" id="edit-cancel">Annuler</button>
+          <button type="submit">Enregistrer</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script type="module" src="dictionnaire.js"></script>
+  </body>
+</html>

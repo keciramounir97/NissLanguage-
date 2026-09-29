@@ -311,6 +311,39 @@ export const entries = [
     literal: { en: "No.", fr: "Non.", ar: "لا." },
     contraire: { en: "Yes.", fr: "Oui.", ar: "نعم." },
   }),
+  phrase(["🍬", "🍭"], ["bonbon"], {
+    literal: { en: "candy", fr: "un bonbon", ar: "حلوى" },
+  }),
+  phrase(["🍫", "🍪"], ["chocolat"], {
+    literal: { en: "chocolate", fr: "du chocolat", ar: "شوكولاتة" },
+  }),
+  phrase(["🍩", "🥐"], ["patisserie"], {
+    literal: { en: "pastry", fr: "une pâtisserie", ar: "معجنات" },
+  }),
+  phrase(["🎂", "🎈"], [], {
+    literal: { en: "birthday cake", fr: "un gâteau d'anniversaire", ar: "كعكة عيد" },
+  }),
+  phrase(["🍨", "🍒"], [], {
+    literal: { en: "ice cream", fr: "une glace", ar: "آيس كريم" },
+  }),
+  phrase(["🍿", "🎬"], [], {
+    literal: { en: "popcorn", fr: "du pop-corn", ar: "فشار" },
+  }),
+  phrase(["🥨", "🧈"], [], {
+    literal: { en: "a pretzel", fr: "un bretzel", ar: "بريتزل" },
+  }),
+  phrase(["🥧", "🍎"], [], {
+    literal: { en: "a pie", fr: "une tarte", ar: "فطيرة" },
+  }),
+  phrase(["🍧", "🫐"], [], {
+    literal: { en: "a sweet ice", fr: "une glace pilée", ar: "ثلج محلى" },
+  }),
+  phrase(["🍮", "🥄"], [], {
+    literal: { en: "pudding", fr: "un flan", ar: "بودينغ" },
+  }),
+  phrase(["🧇", "🍁"], [], {
+    literal: { en: "a waffle", fr: "une gaufre", ar: "وافل" },
+  }),
 ];
 
 export const names = [

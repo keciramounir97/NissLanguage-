@@ -1,6 +1,6 @@
 # NissLanguage
 
-NissLanguage est un code inventé. On l'écrit avec des emojis, des surnoms et des chiffres maquillés. Le traducteur le rend en français, en anglais ou en arabe, selon l'humeur choisie.
+NissLanguage est la langue inventée par Nissou. On l'écrit avec des emojis, des surnoms, des chiffres maquillés, des bonbons et de la pâtisserie. La page Traduire la rend en français, en anglais ou en arabe, selon l'humeur. Le dictionnaire montre la langue choisie, anglais par défaut, à côté de l'équivalent niss.
 
 Le point d'entrée du code est `translateText({ text, source: "niss", target, context })`. `source` vaut toujours `niss`. `target` vaut `fr`, `en` ou `ar`. `context` est une humeur.
 

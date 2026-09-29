@@ -1,4 +1,4 @@
-import { letterIndex, normalize, spell } from "./alphabet.js";
+import { LETTERS, letterIndex, normalize, spell } from "./alphabet.js";
 import { buildIndex, lexicon } from "./lexicon.js";
 
 export const TARGETS = new Set(["en", "fr", "ar"]);
@@ -55,7 +55,7 @@ function reading(entry, target, context) {
   return LENS[context][target](base);
 }
 
-export function translate(input, { target = "en", context = "literal" } = {}) {
+export function translate(input, { target = "en", context = "literal", book } = {}) {
   if (!TARGETS.has(target)) {
     throw new Error(`Langue inconnue : ${target}`);
   }
@@ -68,9 +68,10 @@ export function translate(input, { target = "en", context = "literal" } = {}) {
     return { text: "", target, context, parts: [], unknown: [] };
   }
 
-  const index = buildIndex();
-  const emojiToLetter = letterIndex();
-  const maxLen = Math.max(...lexicon.map((entry) => entry.niss.length));
+  const list = book?.entries || lexicon;
+  const index = buildIndex(list);
+  const emojiToLetter = letterIndex(book?.letters || LETTERS);
+  const maxLen = Math.max(...list.map((entry) => entry.niss.length));
   const parts = [];
   const unknown = [];
   let i = 0;
