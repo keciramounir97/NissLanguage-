@@ -1,0 +1,239 @@
+:root {
+  --ink: #241432;
+  --muted: #5c466e;
+  --paper: #f6f0fa;
+  --rail: #2a1240;
+  --orchid: #7d4e9d;
+  --lilac: #e7d8f3;
+  --blush: #e7b7c9;
+  --note: #fffafd;
+  --line: #dccae9;
+  --focus: #4c2a6b;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Outfit, sans-serif;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 4.75rem 1fr;
+  min-height: 100vh;
+}
+
+.rail {
+  background: var(--rail);
+  color: #f6eefe;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.4rem 0 1rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.rail b {
+  font-family: Fraunces, serif;
+  font-weight: 560;
+  font-size: 1.45rem;
+  letter-spacing: 0.14em;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.rail span {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+}
+
+main {
+  padding: 2.2rem 6vw 4rem;
+  max-width: 68rem;
+}
+
+h1, h2, .out {
+  font-family: Fraunces, serif;
+  font-weight: 560;
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  margin: 0;
+  font-size: 3.1rem;
+  line-height: 0.95;
+}
+
+h2 {
+  margin: 2.4rem 0 0.7rem;
+  font-size: 1.7rem;
+}
+
+.mast p {
+  max-width: 38rem;
+  margin: 0.7rem 0 0;
+  color: var(--muted);
+}
+
+.desk {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 1.5rem;
+  margin-top: 1.6rem;
+  align-items: start;
+}
+
+label, .hint, .unknown, th {
+  color: var(--muted);
+}
+
+textarea, select, input, button {
+  font: inherit;
+  color: inherit;
+}
+
+textarea {
+  width: 100%;
+  margin-top: 0.35rem;
+  border: 0;
+  border-bottom: 2px solid var(--orchid);
+  background: transparent;
+  resize: vertical;
+  min-height: 4.6rem;
+  font-size: 1.7rem;
+  line-height: 1.35;
+  padding: 0.4rem 0;
+}
+
+textarea:focus, select:focus, input:focus, button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+}
+
+.samples, .moods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.samples button, .moods button, #copy {
+  background: none;
+  border: 0;
+  padding: 0.15rem 0;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.moods button[aria-checked="true"] {
+  color: var(--orchid);
+  box-shadow: inset 0 -2px 0 var(--orchid);
+}
+
+.hint { min-height: 1.5em; margin: 0.4rem 0 0; }
+
+.result {
+  background: var(--note);
+  border-left: 4px solid var(--blush);
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.result-bar {
+  display: flex;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+select, #filter {
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  padding: 0.2rem 0;
+}
+
+#copy { margin-left: auto; color: var(--orchid); }
+
+.out {
+  font-size: 2.15rem;
+  line-height: 1.25;
+  margin: 0.8rem 0 0;
+  min-height: 2.6em;
+}
+
+.out[lang="ar"] {
+  font-family: "Noto Naskh Arabic", serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.unknown { margin: 0.6rem 0 0; }
+
+.rules ol { margin: 0; padding-left: 1.2rem; max-width: 42rem; }
+.rules li + li { margin-top: 0.35rem; }
+.niss { font-size: 1.15em; }
+
+.letters {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(4.4rem, 1fr));
+  gap: 0.4rem;
+}
+
+.letters div {
+  background: var(--lilac);
+  padding: 0.45rem 0.2rem 0.35rem;
+  text-align: center;
+}
+
+.letters b { display: block; font-size: 1.35rem; font-weight: 500; }
+.letters span { color: var(--muted); }
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th, td {
+  padding: 0.45rem 0.6rem 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+td.ar, th.ar {
+  font-family: "Noto Naskh Arabic", serif;
+  direction: rtl;
+  text-align: right;
+}
+
+.filter { display: block; margin-top: 0.4rem; }
+
+#filter { width: min(24rem, 100%); margin: 0.2rem 0 0.8rem; }
+
+@media (max-width: 800px) {
+  body { grid-template-columns: 1fr; }
+  .rail {
+    position: static;
+    height: auto;
+    flex-direction: row;
+    padding: 0.8rem 1rem;
+  }
+  .rail b {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  main { padding: 1.3rem 1rem 3rem; }
+  h1 { font-size: 2.4rem; }
+  .desk { grid-template-columns: 1fr; }
+  .out { font-size: 1.7rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto; }
+}

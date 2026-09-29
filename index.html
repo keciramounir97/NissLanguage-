@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NissLanguage</title>
+    <meta
+      name="description"
+      content="NissLanguage traduit un code d'emojis, de surnoms et d'humeurs vers le français, l'anglais et l'arabe."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,620&family=Noto+Naskh+Arabic:wght@500;600&family=Outfit:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.svg" />
+  </head>
+  <body>
+    <aside class="rail">
+      <b>Niss</b>
+      <span>code</span>
+    </aside>
+
+    <main>
+      <header class="mast">
+        <h1>NissLanguage</h1>
+        <p>Un code de filles : emojis, surnoms, chiffres maquillés. Sept humeurs, trois langues.</p>
+      </header>
+
+      <section class="desk" aria-label="Traducteur">
+        <div class="source">
+          <label for="niss">Écrire en niss</label>
+          <textarea id="niss" rows="2" spellcheck="false">💯 👍</textarea>
+          <div class="samples" id="samples"></div>
+          <div class="moods" id="moods" role="radiogroup" aria-label="Humeur"></div>
+          <p class="hint" id="mood-hint"></p>
+        </div>
+
+        <div class="result">
+          <div class="result-bar">
+            <label for="target">Langue</label>
+            <select id="target">
+              <option value="fr">Français</option>
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+            </select>
+            <button type="button" id="copy">Copier</button>
+          </div>
+          <p id="out" class="out" lang="fr"></p>
+          <p id="unknown" class="unknown" hidden></p>
+        </div>
+      </section>
+
+      <section class="rules" aria-labelledby="rules-title">
+        <h2 id="rules-title">Comment lire</h2>
+        <ol>
+          <li>Un mot est un jeton. Les jetons se séparent par des espaces.</li>
+          <li>La plus longue suite connue gagne. <span class="niss">💯 👍</span> veut dire « ça va », pas « vraiment » puis « oui ».</li>
+          <li>Des lettres collées épellent un mot. <span id="hi-spell" class="niss"></span> se lit « hi », donc salut.</li>
+          <li>L'humeur ne change pas l'écriture. Elle change le sens. En registre contraire, la phrase veut dire l'inverse.</li>
+        </ol>
+      </section>
+
+      <section aria-labelledby="fiche-title">
+        <h2 id="fiche-title"><span class="niss">💯 👍</span> dans chaque humeur</h2>
+        <div class="table-wrap">
+          <table id="fiche"></table>
+        </div>
+      </section>
+
+      <section aria-labelledby="alpha-title">
+        <h2 id="alpha-title">Alphabet</h2>
+        <p>Une lettre, un emoji. On les colle pour épeler un prénom ou un mot absent du lexique. <span id="honey-spell"></span></p>
+        <div class="letters" id="letters"></div>
+      </section>
+
+      <section aria-labelledby="num-title">
+        <h2 id="num-title">Chiffres</h2>
+        <div class="table-wrap">
+          <table id="numbers"></table>
+        </div>
+      </section>
+
+      <section aria-labelledby="name-title">
+        <h2 id="name-title">Surnoms</h2>
+        <div class="table-wrap">
+          <table id="names"></table>
+        </div>
+      </section>
+
+      <section aria-labelledby="part-title">
+        <h2 id="part-title">Mots courants</h2>
+        <div class="table-wrap">
+          <table id="particles"></table>
+        </div>
+      </section>
+
+      <section aria-labelledby="lex-title">
+        <h2 id="lex-title">Phrases</h2>
+        <label class="filter" for="filter">Filtrer le lexique</label>
+        <input id="filter" type="search" placeholder="emoji, mot, français, anglais, arabe" />
+        <div class="table-wrap">
+          <table id="phrases"></table>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="app.js"></script>
+  </body>
+</html>
